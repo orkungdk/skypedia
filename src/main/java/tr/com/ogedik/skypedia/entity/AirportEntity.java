@@ -1,15 +1,11 @@
 package tr.com.ogedik.skypedia.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import tr.com.ogedik.skypedia.model.Location;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author orkungedik
@@ -24,11 +20,22 @@ public class AirportEntity extends SkypediaEntity {
     @Column
     private String name;
 
-    @ManyToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="LOCATION_ID")
     private LocationEntity location;
 
     @Column
     private Integer flightCapacity;
 
+    @OneToMany(mappedBy = "destination")
+    private Set<RouteEntity> destinations = new HashSet<>();
+
+    @OneToMany(mappedBy = "departure")
+    private Set<RouteEntity> departures = new HashSet<>();
+
+    @JsonBackReference
+    public LocationEntity getLocation() {
+        return location;
+    }
 }

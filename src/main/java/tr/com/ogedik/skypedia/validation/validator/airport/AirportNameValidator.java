@@ -1,10 +1,11 @@
-package tr.com.ogedik.skypedia.validation.validator;
+package tr.com.ogedik.skypedia.validation.validator.airport;
 
 import org.springframework.stereotype.Component;
 import tr.com.ogedik.skypedia.exception.ErrorMessage;
 import tr.com.ogedik.skypedia.exception.ErrorType;
 import tr.com.ogedik.skypedia.model.Airport;
 import tr.com.ogedik.skypedia.util.CommonValidatorUtils;
+import tr.com.ogedik.skypedia.validation.validator.Validator;
 
 import java.util.List;
 

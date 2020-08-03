@@ -48,7 +48,7 @@ public class LocationServiceImpl implements LocationService {
      */
     @Override
     public Location retrieveById(Long id) {
-        return (Location) CommonServiceUtils.retrieve(id, mapper, repository);
+        return (Location) CommonServiceUtils.retrieveById(id, mapper, repository);
 
     }
 

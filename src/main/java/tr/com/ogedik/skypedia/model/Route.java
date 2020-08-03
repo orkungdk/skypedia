@@ -4,25 +4,21 @@ import lombok.Getter;
 import lombok.Setter;
 import tr.com.ogedik.skypedia.annotation.Required;
 
-import java.util.List;
-
 /**
  * @author orkungedik
  */
 @Getter
 @Setter
-public class Location extends SkypediaModel {
+public class Route extends SkypediaModel {
 
     @Required
-    private String country;
+    private Airport departure;
 
     @Required
-    private String city;
+    private Airport destination;
 
-    @Required
-    private String latitude;
+    private Long distance;
 
-    @Required
-    private String longitude;
+    private int estimatedFlightTime;
 
 }

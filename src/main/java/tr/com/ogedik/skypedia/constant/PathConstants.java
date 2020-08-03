@@ -13,6 +13,8 @@ public class PathConstants {
     public static final String AIRLINE = "airline";
     public static final String AIRPORT = "airport";
     public static final String LOCATION = "location";
+    public static final String ROUTE = "route";
+    public static final String FLIGHT = "flight";
 
     public static final String AUTH_HEADER = "X-Auth-User";
     public static final String ANONYMOUS = "Anonymous";

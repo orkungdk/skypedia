@@ -1,4 +1,4 @@
-package tr.com.ogedik.skypedia.validation.validator;
+package tr.com.ogedik.skypedia.validation.validator.common;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -7,6 +7,7 @@ import tr.com.ogedik.skypedia.exception.ErrorMessage;
 import tr.com.ogedik.skypedia.exception.ErrorType;
 import tr.com.ogedik.skypedia.exception.SkypediaException;
 import tr.com.ogedik.skypedia.model.SkypediaModel;
+import tr.com.ogedik.skypedia.validation.validator.Validator;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

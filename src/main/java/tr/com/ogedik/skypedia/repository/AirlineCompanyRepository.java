@@ -16,8 +16,4 @@ public interface AirlineCompanyRepository extends SkypediaRepository<AirlineComp
 
     @Query("select a from AirlineCompanyEntity a where a.name = :name or a.shortName = :shortName")
     Optional<AirlineCompanyEntity> findAirlineCompany(@Param("name") String name, @Param("shortName") String shortName);
-
-    @Query("select a from AirlineCompanyEntity a where (:name is not null and a.name like %:name%) or" +
-            " (:shortName is not null and a.shortName like %:shortName%)")
-    List<AirlineCompanyEntity> search(@Param("name") String name, @Param("shortName") String shortName);
 }

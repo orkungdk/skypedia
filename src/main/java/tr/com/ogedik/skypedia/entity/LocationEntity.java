@@ -1,11 +1,10 @@
 package tr.com.ogedik.skypedia.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import tr.com.ogedik.skypedia.model.Airport;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -33,7 +32,12 @@ public class LocationEntity extends SkypediaEntity {
     @Column
     private String longitude;
 
-    @OneToMany(mappedBy = "location")
+    @ToString.Exclude
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private List<AirportEntity> airports;
 
+    @JsonManagedReference
+    public List<AirportEntity> getAirports() {
+        return airports;
+    }
 }

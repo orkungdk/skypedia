@@ -18,12 +18,4 @@ public class AirlineController extends SkypediaController<AirlineCompanyRequest,
     public AirlineController(AirlineCompanyService service, AirlineCompanyMapper mapper) {
         super(service, mapper, AirlineController.class);
     }
-
-//    @GetMapping
-//    public SkypediaResponse search(@RequestParam(name = "name", required = false) String name,
-//                                   @RequestParam(name = "shortName", required = false) String shortName) {
-//        logger.info("A request has been received to search airline companies by name {} and shortName {}.", name, shortName);
-//
-//        return SkypediaResponseBuilder.build(service.search(name, shortName));
-//    }
 }

@@ -32,9 +32,7 @@ public class CommonServiceUtils {
      */
     public static List search(SkypediaModel searchRequest, SkypediaMapper mapper, SkypediaRepository repository) {
         SkypediaEntity entity = (SkypediaEntity) mapper.convert(searchRequest);
-
-        Example<SkypediaEntity> searchable = Example.of(entity);
-        List<SkypediaEntity> entities = repository.findAll(searchable);
+        List<SkypediaEntity> entities = repository.findAll(Example.of(entity));
 
         return (List<SkypediaModel>) mapper.convert(entities);
     }
@@ -47,7 +45,7 @@ public class CommonServiceUtils {
      * @param repository {@link SkypediaRepository}
      * @return {@link SkypediaModel}
      */
-    public static SkypediaModel retrieve(Long id, SkypediaMapper mapper, SkypediaRepository repository) {
+    public static SkypediaModel retrieveById(Long id, SkypediaMapper mapper, SkypediaRepository repository) {
         Optional<SkypediaEntity> searchResult = repository.findById(id);
 
         if (searchResult.isPresent()) {
@@ -103,7 +101,7 @@ public class CommonServiceUtils {
      * @param repository {@link SkypediaRepository}
      * @return {@link SkypediaEntity}
      */
-    private static SkypediaEntity persistRecord(SkypediaModel model, SkypediaMapper mapper,
+    public static SkypediaEntity persistRecord(SkypediaModel model, SkypediaMapper mapper,
                                                 SkypediaRepository repository) {
         SkypediaEntity entity = (SkypediaEntity) mapper.convert(model);
         SkypediaEntity persisted = (SkypediaEntity) repository.save(entity);

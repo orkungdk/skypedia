@@ -18,8 +18,6 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Getter
 @Setter
-@ToString
-
 public class SkypediaEntity implements Serializable {
 
     @Id

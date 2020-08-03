@@ -1,7 +1,5 @@
 package tr.com.ogedik.skypedia.service.impl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tr.com.ogedik.skypedia.mapper.entity.AirportEntityMapper;
@@ -36,7 +34,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public Airport retrieveById(Long id) {
-        return (Airport) CommonServiceUtils.retrieve(id, mapper, repository);
+        return (Airport) CommonServiceUtils.retrieveById(id, mapper, repository);
     }
 
     @Override

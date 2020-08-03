@@ -54,7 +54,7 @@ public class AirlineCompanyServiceImpl implements AirlineCompanyService {
      */
     @Override
     public AirlineCompany retrieveById(Long id) {
-        return (AirlineCompany) CommonServiceUtils.retrieve(id, mapper, repository);
+        return (AirlineCompany) CommonServiceUtils.retrieveById(id, mapper, repository);
     }
 
     /**

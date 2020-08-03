@@ -22,9 +22,9 @@ import tr.com.ogedik.skypedia.util.MetaUtils;
 public abstract class SkypediaController<Request extends SkypediaRequest, M extends SkypediaModel> {
 
     protected final SkypediaService service;
-    
+
     protected final RequestMapper mapper;
-    
+
     protected final Logger logger;
 
     protected SkypediaController(SkypediaService service, RequestMapper mapper, Class clazz) {
@@ -36,6 +36,7 @@ public abstract class SkypediaController<Request extends SkypediaRequest, M exte
     @GetMapping("/{id}")
     public SkypediaResponse getById(@PathVariable("id") Long id) {
         logger.info("A request has been received to retrieve by id");
+
         return SkypediaResponseBuilder.build(service.retrieveById(id));
     }
 
@@ -49,7 +50,7 @@ public abstract class SkypediaController<Request extends SkypediaRequest, M exte
 
     @PostMapping
     public SkypediaResponse create(@RequestBody Request request,
-            @RequestHeader(value = PathConstants.AUTH_HEADER, defaultValue = PathConstants.ANONYMOUS) String username) {
+                                   @RequestHeader(value = PathConstants.AUTH_HEADER, defaultValue = PathConstants.ANONYMOUS) String username) {
         logger.info("A request has been received to create {}", request.getClass().getSimpleName());
         M model = (M) mapper.convert(request);
         MetaUtils.fillMeta(model, username);
