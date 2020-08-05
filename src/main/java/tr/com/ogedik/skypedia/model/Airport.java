@@ -17,6 +17,4 @@ public class Airport extends SkypediaModel {
     @Required
     private Location location;
 
-    private Integer flightCapacity;
-
 }

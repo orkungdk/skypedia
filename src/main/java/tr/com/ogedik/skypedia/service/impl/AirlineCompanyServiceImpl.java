@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import tr.com.ogedik.skypedia.exception.ErrorType;
 import tr.com.ogedik.skypedia.exception.SkypediaException;
 import tr.com.ogedik.skypedia.mapper.entity.AirlineCompanyEntityMapper;
@@ -41,7 +40,6 @@ public class AirlineCompanyServiceImpl implements AirlineCompanyService {
      * @return created {@link AirlineCompany}
      */
     @Override
-    @Transactional
     public AirlineCompany create(AirlineCompany airlineCompany) {
         return (AirlineCompany) CommonServiceUtils.createAuditable(airlineCompany, validationFacade, mapper, repository, auditLogService);
     }

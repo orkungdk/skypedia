@@ -5,11 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * @author orkungedik
@@ -37,4 +35,7 @@ public class FlightEntity extends SkypediaEntity {
 
     @Column
     private LocalDateTime departureAt;
+
+    @OneToMany(mappedBy = "flight")
+    private Set<TicketEntity> tickets;
 }

@@ -8,10 +8,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class AirportRequest implements SkypediaRequest {
+public class TicketRequest implements SkypediaRequest {
 
-    private String name;
-
-    private Long locationId;
+    private Long flightId;
 
 }

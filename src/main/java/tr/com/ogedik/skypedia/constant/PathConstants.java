@@ -15,6 +15,9 @@ public class PathConstants {
     public static final String LOCATION = "location";
     public static final String ROUTE = "route";
     public static final String FLIGHT = "flight";
+    public static final String TICKET = "ticket";
+    public static final String BULK = "bulk";
+    public static final String BOOKING = "booking";
 
     public static final String AUTH_HEADER = "X-Auth-User";
     public static final String ANONYMOUS = "Anonymous";

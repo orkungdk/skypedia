@@ -1,10 +1,10 @@
 package tr.com.ogedik.skypedia.mapper.request;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import tr.com.ogedik.skypedia.model.Flight;
 import tr.com.ogedik.skypedia.rest.request.FlightRequest;
 import tr.com.ogedik.skypedia.service.AirlineCompanyService;
@@ -26,7 +26,7 @@ public abstract class FlightMapper extends RequestMapper<Flight, FlightRequest> 
     @Mapping(target = "airlineCompany", ignore = true)
     public abstract Flight convert(FlightRequest request);
 
-    @PostMapping
+    @AfterMapping
     public void fulfillFlight(@MappingTarget Flight flight, FlightRequest request) {
         if (request == null) {
             return;

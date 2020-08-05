@@ -11,6 +11,8 @@ import tr.com.ogedik.skypedia.entity.AuditLogEntity;
 import tr.com.ogedik.skypedia.repository.AuditLogRepository;
 import tr.com.ogedik.skypedia.service.AuditLogService;
 
+import java.util.Collection;
+
 /**
  * @author orkungedik
  */
@@ -33,6 +35,11 @@ public class AuditLogServiceImpl implements AuditLogService {
                 .by(entity.getCreatedBy())
                 .build();
         repository.save(auditLogEntity);
+    }
+
+    @Override
+    public <T extends SkypediaEntity> void logCreate(Collection<T> entities) {
+        entities.stream().forEach(entity -> logCreate(entity));
     }
 
     @Override
