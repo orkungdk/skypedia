@@ -1,0 +1,886 @@
+{
+	"info": {
+		"_postman_id": "7b3ed898-14e5-4b65-bf4b-a0bd1f72ecf4",
+		"name": "Skypedia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Airline Company",
+			"item": [
+				{
+					"name": "Add Airline Company",
+					"item": [
+						{
+							"name": "Add with empty name - Fail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"shortName\": \"TK\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{airlinePath}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{airlinePath}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add with invalid name - Fail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \" Turkish Airlines \",\n    \"shortName\": \"TK\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{airlinePath}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{airlinePath}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add with invalid short name - Fail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Turkish Airlines\",\n    \"shortName\": \"TURKISH\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{airlinePath}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{airlinePath}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add airline company - Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f198516c-65f7-4bea-8426-4512c3c24a3e",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"lastAirlineId\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Turkish Airlines\",\n    \"shortName\": \"TK\"\n}\n/*\n{\n    \"name\": \"Tunisia Airlines\",\n    \"shortName\": \"TU\"\n}\n\n*/",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{airlinePath}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{airlinePath}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Search Airline Company",
+					"item": [
+						{
+							"name": "Search by id - Success",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{airlinePath}}/{{lastAirlineId}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{airlinePath}}",
+										"{{lastAirlineId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Seach by shortName - Success",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{airlinePath}}?shortName=TU",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{airlinePath}}"
+									],
+									"query": [
+										{
+											"key": "shortName",
+											"value": "TU"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Location",
+			"item": [
+				{
+					"name": "Add Location",
+					"item": [
+						{
+							"name": "Add Location - Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4e49009c-6f7e-4167-893f-919a19f7eb3c",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"lastLocationId\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"country\": \"Turkey\",\n    \"city\": \"Istanbul\",\n    \"latitude\": \"32.9697\",\n    \"longitude\": \"-96.80322\"\n}\n/*{\n    \"country\": \"Turkey\",\n    \"city\": \"Ankara\",\n    \"latitude\": \"29.46786\",\n    \"longitude\": \"-98.53506\"\n}\n*/",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{locationPath}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{locationPath}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Search Location",
+					"item": [
+						{
+							"name": "Search by id - Success",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{locationPath}}/{{lastLocationId}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{locationPath}}",
+										"{{lastLocationId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search by country - Success",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{locationPath}}?country=Turkey",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{locationPath}}"
+									],
+									"query": [
+										{
+											"key": "country",
+											"value": "Turkey"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Airport",
+			"item": [
+				{
+					"name": "Add Airport",
+					"item": [
+						{
+							"name": "Add Airport - Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "52477483-c27d-4a46-a3e6-d7be22362574",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"lastAirportId\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Sabiha Gokcen Airport\",\n    \"locationId\": {{lastLocationId}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{airportPath}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{airportPath}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Search Airport",
+					"item": [
+						{
+							"name": "Search by id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{airportPath}}/{{lastAirportId}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{airportPath}}",
+										"{{lastAirportId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search by name locationId",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{airportPath}}?name=Sabiha Gokcen Airport",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{airportPath}}"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Sabiha Gokcen Airport"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Route",
+			"item": [
+				{
+					"name": "Add Route",
+					"item": [
+						{
+							"name": "Add route - Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "db525aad-4aed-4aa2-8b8c-7f3d5c514f9c",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"lastRouteId\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"destinationId\": 2,\n    \"departureId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{routePath}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{routePath}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Search Route",
+					"item": [
+						{
+							"name": "Search by id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{routePath}}/{{lastRouteId}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{routePath}}",
+										"{{lastRouteId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search by airport",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{routePath}}?destinationId=2",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{routePath}}"
+									],
+									"query": [
+										{
+											"key": "destinationId",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Flight",
+			"item": [
+				{
+					"name": "Add Flight",
+					"item": [
+						{
+							"name": "Add Flight - Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c35da948-4410-49f8-b686-aa6bde5135d4",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"lastFlightId\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"airlineCompanyId\": 1,\n    \"routeId\": {{lastRouteId}},\n    \"numberOfSeats\": 100,\n    \"initialPrice\": 250,\n    \"departureAt\": \"2018-02-05T12:59:11.332\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{flightPath}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{flightPath}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Search Flight",
+					"item": [
+						{
+							"name": "Search by id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{flightPath}}/{{lastFlightId}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{flightPath}}",
+										"{{lastFlightId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search by airlineCompanyId",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{flightPath}}?airlineCompanyId=1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{flightPath}}"
+									],
+									"query": [
+										{
+											"key": "airlineCompanyId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ticket",
+			"item": [
+				{
+					"name": "Add Ticket",
+					"item": [
+						{
+							"name": "Add Ticket - Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5af74f17-914d-4ed7-8aef-5825eedeaf68",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"lastTicketId\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"flightId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{ticketPath}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{ticketPath}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Ticket Bulk - Success",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"flightId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{ticketPath}}/bulk",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{ticketPath}}",
+										"bulk"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Search Ticket",
+					"item": [
+						{
+							"name": "Search by id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{ticketPath}}/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{ticketPath}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search by flight",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{ticketPath}}?flightId={{lastFlightId}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{ticketPath}}"
+									],
+									"query": [
+										{
+											"key": "flightId",
+											"value": "{{lastFlightId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Add Booking",
+					"item": [
+						{
+							"name": "Book a ticket",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ticketId\": 1,\n    \"price\": 100,\n    \"cardNumber\": \"1234-56789-1234-567\",\n    \"name\": \"Orkun\",\n    \"surname\": \"Gedik\",\n    \"email\": \"orkungedik90@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/{{contextPath}}/{{bookingPath}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"{{contextPath}}",
+										"{{bookingPath}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -58,7 +58,7 @@ public class TicketServiceImpl implements TicketService {
 
         for (int i = 0; i < numberOfSeats; i++) {
             TicketEntity ticketEntity = mapper.convert(ticket);
-            ticket.setTicketStatus(TicketStatus.AVAILABLE);
+            ticketEntity.setTicketStatus(TicketStatus.AVAILABLE);
 
             ticketEntities.add(ticketEntity);
         }
@@ -80,7 +80,7 @@ public class TicketServiceImpl implements TicketService {
         validationFacade.validateCreate(ticket);
 
         TicketEntity ticketEntity = mapper.convert(ticket);
-        ticket.setTicketStatus(TicketStatus.AVAILABLE);
+        ticketEntity.setTicketStatus(TicketStatus.AVAILABLE);
 
         TicketEntity persistedTicket = ticketRepository.save(ticketEntity);
         auditLogService.logCreate(persistedTicket);
@@ -160,7 +160,7 @@ public class TicketServiceImpl implements TicketService {
      * @return calculated price
      */
     private Long calculateTicketPrice(Long initialPrice, Integer numberOfSeats, Integer numberOfBookedSeats) {
-        int ratio = numberOfBookedSeats * 10 / numberOfBookedSeats;
+        int ratio = numberOfBookedSeats * 10 / numberOfSeats;
         logger.info("{}% of tickets have been booked.", ratio);
 
         Long finalPrice = Long.valueOf(initialPrice + (initialPrice * ratio / 10));

@@ -16,8 +16,15 @@ public class CreditCardValidator implements Validator<Booking> {
 
     @Override
     public List<ErrorMessage> validate(Booking validationBo, List<ErrorMessage> errorMessages) {
-        if (!validationBo.getCardNumber().matches("^[0-9]{2}$")) {
-            errorMessages.add(new ErrorMessage(ErrorType.INVALID_INPUT, "Card number is not valid.", "cardNumber"));
+
+        String cardNumber = validationBo.getCardNumber().replaceAll(" ", "")
+                .replaceAll("-", "")
+                .replaceAll(",", "");
+
+        if (cardNumber.matches("^[0-9]{16}$")) {
+            validationBo.setCardNumber(cardNumber.substring(0, 6) + "******" + cardNumber.substring(cardNumber.length() - 4));
+        } else {
+            errorMessages.add(new ErrorMessage(ErrorType.INVALID_INPUT, "Card number length must be 16.", "cardNumber"));
         }
 
         return errorMessages;
