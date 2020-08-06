@@ -17,7 +17,11 @@ public enum ErrorType {
     INVALID_INPUT("Invalid Input Value", 400),
     MISSING_FIELD_VALUE("Mandatory Field Missing", 400),
     NO_SEARCH_CRITERIA("No Search Criteria Found.", 400),
-    ALREADY_EXISTED_DATA("Data Already Exists.", 400);
+    ALREADY_EXISTED_DATA("Data Already Exists.", 400),
+    RECORD_NOT_FOUND("Record Cannot Found in Database.", 500),
+    TICKED_BOOKED("Ticket Already Booked.", 400),
+    FULL_CAPACITY("Flight Capacity is Full.", 400),
+    INSUFFICIENT_AMOUNT("Insufficient Amount.", 400);
 
     private String title;
     private int status;

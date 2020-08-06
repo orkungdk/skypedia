@@ -25,9 +25,6 @@ public class AirportEntity extends SkypediaEntity {
     @JoinColumn(name="LOCATION_ID")
     private LocationEntity location;
 
-    @Column
-    private Integer flightCapacity;
-
     @OneToMany(mappedBy = "destination")
     private Set<RouteEntity> destinations = new HashSet<>();
 

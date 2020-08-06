@@ -3,7 +3,6 @@ package tr.com.ogedik.skypedia.validation.facade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.com.ogedik.skypedia.model.Airport;
-import tr.com.ogedik.skypedia.validation.validator.airport.AirportCapacityValidator;
 import tr.com.ogedik.skypedia.validation.validator.airport.AirportNameValidator;
 import tr.com.ogedik.skypedia.validation.validator.common.MandatoryFieldValidator;
 
@@ -17,10 +16,8 @@ public class AirportValidationFacade implements ValidationFacade<Airport> {
     private MandatoryFieldValidator mandatoryFieldValidator;
     @Autowired
     private AirportNameValidator airportNameValidator;
-    @Autowired
-    private AirportCapacityValidator airportCapacityValidator;
 
     public void validateCreate(Airport airport) {
-        validate(airport, mandatoryFieldValidator, airportCapacityValidator, airportNameValidator);
+        validate(airport, mandatoryFieldValidator, airportNameValidator);
     }
 }

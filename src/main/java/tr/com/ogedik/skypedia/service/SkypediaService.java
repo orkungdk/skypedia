@@ -1,6 +1,6 @@
 package tr.com.ogedik.skypedia.service;
 
-import tr.com.ogedik.skypedia.model.AirlineCompany;
+import org.springframework.transaction.annotation.Transactional;
 import tr.com.ogedik.skypedia.model.SkypediaModel;
 
 import java.util.List;
@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface SkypediaService<T extends SkypediaModel> {
 
+    @Transactional
     T create(T model);
 
     T retrieveById(Long id);
